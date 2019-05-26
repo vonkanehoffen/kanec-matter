@@ -1,45 +1,47 @@
-import Matter from 'matter-js';
-import './main.css';
+import {
+  Engine,
+  Render,
+  World,
+  Bodies,
+  Composite,
+  Mouse,
+  MouseConstraint
+} from "matter-js";
+import "./main.css";
 
-console.log('hello', Matter);
 // const element = document.querySelector('body');
 // const width = element.clientWidth;
 // const height = element.clientHeight;
 // console.log(width, height)
 
-// module aliases
-var Engine = Matter.Engine,
-  Render = Matter.Render,
-  World = Matter.World,
-  Bodies = Matter.Bodies,
-  Composite = Matter.Composite;
-
-
 // create an engine
-var engine = Engine.create();
+let engine = Engine.create();
 
 const vw = document.documentElement.clientWidth;
 const vh = document.documentElement.clientHeight;
 
 // create a renderer
-var render = Render.create({
+let render = Render.create({
   element: document.body,
   engine: engine,
   options: {
     width: vw,
-    height: vh,
+    height: vh
   }
 });
 
 // create two boxes and a ground
-var boxA = Bodies.rectangle(400, 200, 80, 80);
-var boxB = Bodies.rectangle(450, 50, 80, 80);
-var ground = Bodies.rectangle(vw/2, vh, vw, 10, { isStatic: true });
-var leftSide = Bodies.rectangle(0, vh/2, 10, vh, { isStatic: true });
-var rightSide = Bodies.rectangle(vw, vh/2, 10, vh, { isStatic: true });
+// let boxA = Bodies.rectangle(400, 200, 80, 80);
+// let boxB = Bodies.rectangle(450, 50, 80, 80);
+const hero = Bodies.rectangle(vw / 2, vh / 2, vw / 2, vh / 2, {
+  isStatic: true
+});
+let ground = Bodies.rectangle(vw / 2, vh, vw, 10, { isStatic: true });
+let leftSide = Bodies.rectangle(0, vh / 2, 10, vh, { isStatic: true });
+let rightSide = Bodies.rectangle(vw, vh / 2, 10, vh, { isStatic: true });
 
 // add all of the bodies to the world
-World.add(engine.world, [boxA, boxB, ground, leftSide, rightSide]);
+World.add(engine.world, [hero, ground, leftSide, rightSide]);
 
 // run the engine
 Engine.run(engine);
@@ -48,8 +50,10 @@ Engine.run(engine);
 Render.run(render);
 
 const i = setInterval(() => {
-  if(!document.hidden) {
-    const thing = Bodies.rectangle(Math.random()*vw, 200, 60, 60, { angle: Math.random()*(Math.PI*2) });
+  if (!document.hidden) {
+    const thing = Bodies.rectangle(Math.random() * vw, 0, 60, 60, {
+      angle: Math.random() * (Math.PI * 2)
+    });
     World.add(engine.world, thing);
   }
-}, 1000)
+}, 1000);
