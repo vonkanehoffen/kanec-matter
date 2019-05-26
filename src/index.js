@@ -9,6 +9,8 @@ import {
   Constraint
 } from "matter-js";
 import "./main.css";
+// import grumpy from "./GRUMPYCAT.jpg";
+// import testCard from "./testcard.png";
 
 // const element = document.querySelector('body');
 // const width = element.clientWidth;
@@ -37,9 +39,12 @@ let render = Render.create({
 const heroW = vw / 2,
   heroH = vh / 2;
 
-const hero = Bodies.rectangle(vw / 2, vh / 2, heroW, heroH, {
-  // isStatic: true
+const hero = Bodies.circle(vw / 2, vh / 2, vw / 6, {
+  isStatic: true
 });
+// const hero = Bodies.rectangle(vw / 2, vh / 2, heroW, heroH, {
+//   isStatic: true
+// });
 let ground = Bodies.rectangle(vw / 2, vh, vw, 10, { isStatic: true });
 let leftSide = Bodies.rectangle(0, vh / 2, 10, vh, { isStatic: true });
 let rightSide = Bodies.rectangle(vw, vh / 2, 10, vh, { isStatic: true });
@@ -69,40 +74,40 @@ const lcCommonProps = {
   }
 };
 // Pin logo
-const logoConstraintTL = Constraint.create({
-  pointA: { x: 0, y: 0 },
-  pointB: { x: -heroW / 2, y: -heroH / 2 },
-  bodyB: hero,
-  ...lcCommonProps
-});
-
-const logoConstraintTR = Constraint.create({
-  pointA: { x: vw, y: 0 },
-  pointB: { x: heroW / 2, y: -heroH / 2 },
-  bodyB: hero,
-  ...lcCommonProps
-});
-
-const logoConstraintBR = Constraint.create({
-  pointA: { x: vw, y: vh },
-  pointB: { x: heroW / 2, y: heroH / 2 },
-  bodyB: hero,
-  ...lcCommonProps
-});
-
-const logoConstraintBL = Constraint.create({
-  pointA: { x: 0, y: vh },
-  pointB: { x: -heroW / 2, y: heroH / 2 },
-  bodyB: hero,
-  ...lcCommonProps
-});
-
-World.add(engine.world, [
-  logoConstraintTL,
-  logoConstraintTR,
-  logoConstraintBR,
-  logoConstraintBL
-]);
+// const logoConstraintTL = Constraint.create({
+//   pointA: { x: 0, y: 0 },
+//   pointB: { x: -heroW / 2, y: -heroH / 2 },
+//   bodyB: hero,
+//   ...lcCommonProps
+// });
+//
+// const logoConstraintTR = Constraint.create({
+//   pointA: { x: vw, y: 0 },
+//   pointB: { x: heroW / 2, y: -heroH / 2 },
+//   bodyB: hero,
+//   ...lcCommonProps
+// });
+//
+// const logoConstraintBR = Constraint.create({
+//   pointA: { x: vw, y: vh },
+//   pointB: { x: heroW / 2, y: heroH / 2 },
+//   bodyB: hero,
+//   ...lcCommonProps
+// });
+//
+// const logoConstraintBL = Constraint.create({
+//   pointA: { x: 0, y: vh },
+//   pointB: { x: -heroW / 2, y: heroH / 2 },
+//   bodyB: hero,
+//   ...lcCommonProps
+// });
+//
+// World.add(engine.world, [
+//   logoConstraintTL,
+//   logoConstraintTR,
+//   logoConstraintBR,
+//   logoConstraintBL
+// ]);
 
 // run the engine
 Engine.run(engine);
@@ -110,11 +115,20 @@ Engine.run(engine);
 // run the renderer
 Render.run(render);
 
+const maxBoxes = 20 * 40;
+let boxCount = 0;
 const i = setInterval(() => {
-  if (!document.hidden) {
+  if (!document.hidden && maxBoxes > boxCount) {
     const thing = Bodies.rectangle(Math.random() * vw, 0, 60, 60, {
-      angle: Math.random() * (Math.PI * 2)
+      angle: Math.random() * (Math.PI * 2),
+      render: {
+        strokeStyle: "#ffffff"
+        // sprite: {
+        //   texture: testCard
+        // }
+      }
     });
     World.add(engine.world, thing);
+    boxCount += 1;
   }
 }, 1000);
