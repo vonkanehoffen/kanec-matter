@@ -43,6 +43,22 @@ let rightSide = Bodies.rectangle(vw, vh / 2, 10, vh, { isStatic: true });
 // add all of the bodies to the world
 World.add(engine.world, [hero, ground, leftSide, rightSide]);
 
+// add mouse control
+let mouse = Mouse.create(render.canvas);
+let mouseConstraint = MouseConstraint.create(engine, {
+  mouse: mouse,
+  constraint: {
+    stiffness: 0.2,
+    render: {
+      visible: false
+    }
+  }
+});
+
+World.add(engine.world, mouseConstraint);
+
+render.mouse = mouse;
+
 // run the engine
 Engine.run(engine);
 
