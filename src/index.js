@@ -26,8 +26,9 @@ import logo8 from "./img/120/react.png";
 // create an engine
 let engine = Engine.create();
 
-const vw = document.documentElement.clientWidth;
-const vh = document.documentElement.clientHeight;
+const body = document.querySelector("body");
+const vw = body.clientWidth;
+const vh = body.clientHeight;
 
 // create a renderer
 let render = Render.create({
@@ -37,7 +38,7 @@ let render = Render.create({
     width: vw,
     height: vh,
     wireframes: false,
-    background: "#ffffff"
+    background: "#121212"
   }
 });
 
