@@ -9,8 +9,14 @@ import {
   Constraint
 } from "matter-js";
 import "./main.css";
-// import grumpy from "./GRUMPYCAT.jpg";
-// import testCard from "./testcard.png";
+import logo1 from "./img/120/creativeCloud.png";
+import logo2 from "./img/120/git.png";
+import logo3 from "./img/120/gitlab.png";
+import logo4 from "./img/120/graphQL.png";
+import logo5 from "./img/120/redux.png";
+import logo6 from "./img/120/sketch.png";
+import logo7 from "./img/120/ubuntu.png";
+import logo8 from "./img/120/react.png";
 
 // const element = document.querySelector('body');
 // const width = element.clientWidth;
@@ -29,7 +35,9 @@ let render = Render.create({
   engine: engine,
   options: {
     width: vw,
-    height: vh
+    height: vh,
+    wireframes: false,
+    background: "#ffffff"
   }
 });
 
@@ -39,9 +47,9 @@ let render = Render.create({
 const heroW = vw / 2,
   heroH = vh / 2;
 
-const hero = Bodies.circle(vw / 2, vh / 2, vw / 6, {
-  isStatic: true
-});
+// const hero = Bodies.circle(vw / 2, vh / 2, vw / 6, {
+//   isStatic: true
+// });
 // const hero = Bodies.rectangle(vw / 2, vh / 2, heroW, heroH, {
 //   isStatic: true
 // });
@@ -50,7 +58,7 @@ let leftSide = Bodies.rectangle(0, vh / 2, 10, vh, { isStatic: true });
 let rightSide = Bodies.rectangle(vw, vh / 2, 10, vh, { isStatic: true });
 
 // add all of the bodies to the world
-World.add(engine.world, [hero, ground, leftSide, rightSide]);
+World.add(engine.world, [ground, leftSide, rightSide]);
 
 // add mouse control
 let mouse = Mouse.create(render.canvas);
@@ -115,20 +123,65 @@ Engine.run(engine);
 // run the renderer
 Render.run(render);
 
-const maxBoxes = 20 * 40;
+const boxSize = 60;
+const maxBoxes = Math.floor(((vw / boxSize) * (vh / boxSize)) / 2);
+console.log("max boxes = ", maxBoxes);
+
+const logos = [logo1, logo2, logo3, logo4, logo5, logo6, logo7, logo8];
+
 let boxCount = 0;
 const i = setInterval(() => {
   if (!document.hidden && maxBoxes > boxCount) {
-    const thing = Bodies.rectangle(Math.random() * vw, 0, 60, 60, {
+    const thing = Bodies.rectangle(Math.random() * vw, -120, 60, 60, {
       angle: Math.random() * (Math.PI * 2),
       render: {
-        strokeStyle: "#ffffff"
-        // sprite: {
-        //   texture: testCard
-        // }
+        strokeStyle: "#ffffff",
+        sprite: {
+          texture: logos[Math.floor(Math.random() * logos.length)],
+          xScale: 0.5,
+          yScale: 0.5
+        }
       }
     });
     World.add(engine.world, thing);
     boxCount += 1;
+    console.log(boxCount);
   }
-}, 1000);
+}, 500);
+
+//
+//
+// var canvas = document.createElement('canvas'),
+//   context = canvas.getContext('2d');
+//
+// canvas.width = 800;
+// canvas.height = 600;
+//
+// document.body.appendChild(canvas);
+//
+// (function render() {
+//   var bodies = Composite.allBodies(engine.world);
+//
+//   window.requestAnimationFrame(render);
+//
+//   context.fillStyle = '#fff';
+//   context.fillRect(0, 0, canvas.width, canvas.height);
+//
+//   context.beginPath();
+//
+//   for (var i = 0; i < bodies.length; i += 1) {
+//     var vertices = bodies[i].vertices;
+//
+//     context.moveTo(vertices[0].x, vertices[0].y);
+//
+//     for (var j = 1; j < vertices.length; j += 1) {
+//       context.lineTo(vertices[j].x, vertices[j].y);
+//     }
+//
+//     context.lineTo(vertices[0].x, vertices[0].y);
+//   }
+//
+//   context.lineWidth = 1;
+//   context.strokeStyle = '#999';
+//   context.stroke();
+// })();
