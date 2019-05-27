@@ -6,25 +6,32 @@ body, html {
   background: aqua;
 }
 
-/*.center {*/
-  /*position: fixed;*/
-  /*display: flex;*/
-  /*justify-content: center;*/
-  /*align-items: center;*/
-  /*!*background: rgba(255, 0,0,0.5);*!*/
-  /*width: 100%;*/
-  /*height: 100%;*/
-/*}*/
+h1 {
+  font-weight: 600;
+  font-size: 30px;
+}
+h2 {
+  font-weight: 300;
+  font-size: 18px;
+  margin-top: 0;
+}
+h2 span {
+  font-weight: 600;
+}
+
 #hero {
   position: absolute;
   top: 50%;
   left:50%;
   transform: translateY(-50%) translateX(-50%);
-  background: #00449D;
+  /*background: #00449D;*/
+  background: rgba(0,68,157,.9);
   color: white;
-  padding: 2rem;
-  max-width: 60%;
+  padding: 1rem;
+  /*max-width: 90%;*/
+  width: 80%;
 }
+
 .contact-icon {
   transition: opacity .3s;
 }
@@ -33,18 +40,34 @@ body, html {
 }
 
 .contact-icon svg {
-  height: 40px;
+  height: 30px;
   margin-right: 1rem;
 }
-h1 {
-  font-weight: 600;
-  font-size: 65px;
+
+@media (min-width: 576px) {
+
 }
-h2 {
-  font-weight: 300;
-  font-size: 34px;
-  margin-top: 0;
+
+@media (min-width: 768px) {
+
 }
-h2 span {
-  font-weight: 600;
+
+@media (min-width: 992px) {
+  h1 {
+    font-size: 65px;
+  }
+  h2 {
+    font-size: 34px;
+  }
+  #hero {
+    max-width: 60%;
+    padding: 2rem;
+  }
+  .contact-icon svg {
+    height: 40px;
+  }
+}
+
+@media (min-width: 1200px) {
+
 }
