@@ -69,5 +69,7 @@ h2 span {
 }
 
 @media (min-width: 1200px) {
-
+  #hero {
+    max-width: 60%;
+  }
 }
